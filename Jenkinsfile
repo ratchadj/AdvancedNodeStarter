@@ -7,8 +7,8 @@ node {
 
     stage('Initialize'){
         def dockerHome = tool 'myDocker'
-        def mavenHome  = tool 'myMaven'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+        def nodejsHome  = tool 'myNodejs'
+        env.PATH = "${dockerHome}/bin:${nodejsHome}/bin:${env.PATH}"
     }
 
     stage('Checkout') {
@@ -22,6 +22,14 @@ node {
     stage('Sonar'){
         try {
             sh "mvn sonar:sonar"
+        } catch(error){
+            echo "The sonar server could not be reached ${error}"
+        }
+     }
+    
+    stage('Test'){
+        try {
+            
         } catch(error){
             echo "The sonar server could not be reached ${error}"
         }
