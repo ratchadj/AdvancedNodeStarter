@@ -1,3 +1,4 @@
+def JENKIN_SONAR_WEBHOOK_URL = "http://192.168.1.63:8080/sonarqube-webhook/"
 def CONTAINER_NAME="jenkins-pipeline"
 def CONTAINER_TAG="latest"
 def DOCKER_HUB_USER="ratchada.jududom@gmail.com"
@@ -27,6 +28,7 @@ node {
         def scannerHome = tool 'SonarQube Scanner';
         withSonarQubeEnv('SonarQube') {
           sh "${scannerHome}/bin/sonar-scanner " +
+              "-Dsonar.webhooks.global="+ JENKIN_SONAR_WEBHOOK_URL +" "+
               "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
               "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
               "-Dsonar.projectVersion=1.0 " +
