@@ -21,6 +21,7 @@ node {
     
     stage('SonarQube analysis') {
         // requires SonarQube Scanner 2.8+
+        sh "pwd"
         def scannerHome = tool 'SonarQube Scanner';
         withSonarQubeEnv('SonarQube') {
           sh "${scannerHome}/bin/sonar-scanner " +
@@ -30,7 +31,7 @@ node {
               "-Dsonar.projectVersion=1.0 " +
               "-Dsonar.language=js " +
               "-Dsonar.sources=./ " +
-              "-Dsonar.exclusions=./node_modules/**" +
+              "-Dsonar.exclusions=/var/jenkins_home/workspace/nodejs-pipline/node_modules/**" +
               "-Dsonar.sourceEncoding=UTF-8 "
         }
     }
