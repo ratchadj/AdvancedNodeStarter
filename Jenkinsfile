@@ -16,12 +16,12 @@ node {
     }
 
     stage('Build'){
-        sh "mvn clean install"
+        sh "npm install --production"
     }
 
     stage('Sonar'){
         try {
-            sh "mvn sonar:sonar"
+            sh "npm sonar:sonar"
         } catch(error){
             echo "The sonar server could not be reached ${error}"
         }
