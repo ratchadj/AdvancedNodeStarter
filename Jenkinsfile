@@ -16,13 +16,13 @@ node {
     }
 
     stage('Build'){
-        sh "npm install --production"
+        // sh "npm install --production"
     }
     
     stage('SonarQube analysis') {
         // requires SonarQube Scanner 2.8+
         def scannerHome = tool 'SonarQube Scanner';
-        withSonarQubeEnv('My SonarQube Server') {
+        withSonarQubeEnv('SonarQube Scanner') {
           sh "${scannerHome}/bin/sonar-scanner"
         }
     }
