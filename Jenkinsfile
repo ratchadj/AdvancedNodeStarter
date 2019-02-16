@@ -18,28 +18,16 @@ node {
     stage('Build'){
         sh "npm install --production"
     }
-
+    
     stage('SonarQube analysis') {
-      steps {
-        script {
-          echo '${WORKSPACE}'
-          def scannerHome = tool 'sonarqube-scanner';
-          withSonarQubeEnv('sonarqube-server') {
-            sh "${scannerHome}/bin/sonar-scanner " +
-              "-Dsonar.projectKey=nodejs:demo:pipeline " +
-              "-Dsonar.projectName=nodejs-demo-pipeline " +
-              "-Dsonar.sources=. " +
-              "-Dsonar.projectVersion=1.0 " +
-              "-Dsonar.language=js " +
-              "-Dsonar.sources=./ " +
-              "-Dsonar.sourceEncoding=UTF-8 "
-          }
+        // requires SonarQube Scanner 2.8+
+        def scannerHome = tool 'SonarQube Scanner';
+        withSonarQubeEnv('My SonarQube Server') {
+          sh "${scannerHome}/bin/sonar-scanner"
         }
-      }
     }
-    // No need to occupy a node
+    
     stage("Quality Gate") {
-      steps {
         script {
           timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
             def qualitygate = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
@@ -48,7 +36,6 @@ node {
             }
           }
         }
-      }
     }
     
     stage('Test'){
