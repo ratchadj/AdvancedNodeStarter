@@ -30,7 +30,7 @@ node {
               "-Dsonar.projectVersion=1.0 " +
               "-Dsonar.language=js " +
               "-Dsonar.sources=./ " +
-              "-Dsonar.exclusions=./node_modules/** " +
+              "-Dsonar.exclusions=**/node_modules/*.js" +
               "-Dsonar.sourceEncoding=UTF-8 "
         }
     }
