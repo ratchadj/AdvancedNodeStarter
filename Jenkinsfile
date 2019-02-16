@@ -27,7 +27,6 @@ node {
           sh "${scannerHome}/bin/sonar-scanner " +
               "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
               "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
-              "-Dsonar.sources=. " +
               "-Dsonar.projectVersion=1.0 " +
               "-Dsonar.language=js " +
               "-Dsonar.sources=./ " +
