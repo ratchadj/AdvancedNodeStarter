@@ -23,7 +23,14 @@ node {
         // requires SonarQube Scanner 2.8+
         def scannerHome = tool 'SonarQube Scanner';
         withSonarQubeEnv('SonarQube') {
-          sh "${scannerHome}/bin/sonar-scanner"
+          sh "${scannerHome}/bin/sonar-scanner " +
+              "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
+              "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
+              "-Dsonar.sources=. " +
+              "-Dsonar.projectVersion=1.0 " +
+              "-Dsonar.language=js " +
+              "-Dsonar.sources=./ " +
+              "-Dsonar.sourceEncoding=UTF-8 "
         }
     }
     
