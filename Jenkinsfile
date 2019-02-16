@@ -4,7 +4,9 @@ def DOCKER_HUB_USER="ratchada.jududom@gmail.com"
 def HTTP_PORT="8090"
 
 node {
-
+    stage('clean workspace') {
+        cleanWs()
+    }
     stage('Initialize'){
         def dockerHome = tool 'myDocker'
         def nodejsHome  = tool 'myNodejs'
