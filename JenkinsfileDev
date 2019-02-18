@@ -15,7 +15,7 @@ node {
     }
 
     stage('Build'){
-        sh "npm install --development"
+        // sh "npm install --development"
     }
     
     stage('SonarQube analysis') {
