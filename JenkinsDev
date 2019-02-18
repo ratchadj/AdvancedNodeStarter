@@ -1,0 +1,50 @@
+def JENKIN_SONAR_WEBHOOK_URL = "http://192.168.1.63:8080/sonarqube-webhook/"
+
+node {
+    stage('clean workspace') {
+        cleanWs()
+    }
+    stage('Initialize'){
+        def dockerHome = tool 'myDocker'
+        def nodejsHome  = tool 'myNodejs'
+        env.PATH = "${dockerHome}/bin:${nodejsHome}/bin:${env.PATH}"
+    }
+
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Build'){
+        sh "npm install --development"
+    }
+    
+    stage('SonarQube analysis') {
+        // requires SonarQube Scanner 2.8+
+        def scannerHome = tool 'mySonarqube';
+        withSonarQubeEnv('sonarQubeServer') {
+          sh "${scannerHome}/bin/sonar-scanner " +
+              "-Dsonar.webhooks.global="+ JENKIN_SONAR_WEBHOOK_URL +" "+
+              "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
+              "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
+              "-Dsonar.projectVersion=1.0 " +
+              "-Dsonar.language=js " +
+              "-Dsonar.sources=./ " +
+              "-Dsonar.sourceEncoding=UTF-8 " +
+              "-Dsonar.exclusions=./node_modules/**/*"
+        }
+    }
+    
+    stage("Quality Gate") {
+      timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+        waitForQualityGate abortPipeline: true
+      }
+    }
+    
+    stage('Test'){
+        try {
+            
+        } catch(error){
+            echo "The sonar server could not be reached ${error}"
+        }
+     }
+}
