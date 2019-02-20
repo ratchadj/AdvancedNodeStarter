@@ -28,7 +28,7 @@ node {
               "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
               "-Dsonar.projectVersion=1.0 " +
               "-Dsonar.language=js " +
-              "-Dsonar.login=2397c34ab17302069e578ab95549e93c2a987b36 " +
+              "-Dsonar.login=9290c52805c358066affb5d43b114622b5afeb5e " +
               "-Dsonar.sources=./ " +
               "-Dsonar.sourceEncoding=UTF-8 " +
               "-Dsonar.exclusions=./node_modules/**/*"
