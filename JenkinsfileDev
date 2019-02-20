@@ -1,4 +1,4 @@
-def JENKIN_SONAR_WEBHOOK_URL = "http://192.168.1.63:8080/sonarqube-webhook/"
+def JENKIN_SONAR_WEBHOOK_URL = "http://159.89.201.168:8080/sonarqube-webhook/"
 
 node {
     stage('clean workspace') {
