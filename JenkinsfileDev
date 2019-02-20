@@ -20,24 +20,24 @@ node {
     
     stage('SonarQube analysis') {
         // requires SonarQube Scanner 2.8+
-        def scannerHome = tool 'mySonarqube';
-        withSonarQubeEnv('mySonarQubeServer') {
-          sh "${scannerHome}/bin/sonar-scanner " +
-              "-Dsonar.webhooks.global="+ JENKIN_SONAR_WEBHOOK_URL +" "+
-              "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
-              "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
-              "-Dsonar.projectVersion=1.0 " +
-              "-Dsonar.language=js " +
-              "-Dsonar.sources=./ " +
-              "-Dsonar.sourceEncoding=UTF-8 " +
-              "-Dsonar.exclusions=./node_modules/**/*"
-        }
+        // def scannerHome = tool 'mySonarqube';
+        // withSonarQubeEnv('mySonarQubeServer') {
+        //   sh "${scannerHome}/bin/sonar-scanner " +
+        //       "-Dsonar.webhooks.global="+ JENKIN_SONAR_WEBHOOK_URL +" "+
+        //       "-Dsonar.projectKey=AdvancedNodeStarter:pipeline " +
+        //       "-Dsonar.projectName=AdvancedNodeStarter-pipeline " +
+        //       "-Dsonar.projectVersion=1.0 " +
+        //       "-Dsonar.language=js " +
+        //       "-Dsonar.sources=./ " +
+        //       "-Dsonar.sourceEncoding=UTF-8 " +
+        //       "-Dsonar.exclusions=./node_modules/**/*"
+        // }
     }
     
     stage("Quality Gate") {
-      timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
-        waitForQualityGate abortPipeline: true
-      }
+      // timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+      //   waitForQualityGate abortPipeline: true
+      // }
     }
     
     stage('Test'){
