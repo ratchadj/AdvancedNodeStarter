@@ -1,6 +1,6 @@
 def JENKIN_SONAR_WEBHOOK_URL = "http://159.89.201.168:8080/sonarqube-webhook/"
 
-node {
+node('master') {
     stage('clean workspace') {
         cleanWs()
     }
@@ -55,4 +55,6 @@ node {
             // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
         }
     }  
+}
+node('178.128.214.64') {
 }
