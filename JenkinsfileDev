@@ -49,9 +49,9 @@ node('master') {
      }
    stage ('Deploy') {
         sshagent(['09eab1ae-c6ff-4c93-b409-8c0e7a8aa6da']) {
-            sh 'ssh -o StrictHostKeyChecking=no root@178.128.214.64 uptime'
-            sh 'ssh -v root@178.128.214.64'
-            sh 'pwd'
+            //sh 'ssh -o StrictHostKeyChecking=no root@178.128.214.64 uptime'
+            //sh 'ssh -v root@178.128.214.64'
+            //sh 'pwd'
             // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
         }
     }
