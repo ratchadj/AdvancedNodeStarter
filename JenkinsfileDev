@@ -48,7 +48,7 @@ node('master') {
         }
      }
    stage ('Deploy') {
-        sshagent(credentials : ['fbcd040a-186a-4778-bd8c-061c7d22e78e']) {
+        sshagent(['fbcd040a-186a-4778-bd8c-061c7d22e78e']) {
             sh 'ssh -o StrictHostKeyChecking=no -l root 178.128.214.64 uname -a'
             sh 'pwd'
             // sh 'scp ./source/filename user@hostname.com:/remotehost/target'
